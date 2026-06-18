@@ -1,0 +1,9 @@
+/epss-kev
+/vuln-sarif
+*.exe
+*.sarif
+*.out
+/vendor/
+.DS_Store
+.idea/
+.vscode/
