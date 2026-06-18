@@ -75,6 +75,26 @@ import sarif "github.com/safetylab/ShadowSecurityScanner/sarif"
 out, _ := sarif.Marshal(findings, sarif.DefaultTool)
 ```
 
+### `triage` — findings → enrich → SARIF (end to end)
+
+Read vulnerability findings as JSON (see
+[`findings/findings.schema.json`](findings/findings.schema.json)), enrich them with
+EPSS + CISA KEV, sort fix-first, and print a ranked table or a SARIF report.
+
+```bash
+go install github.com/safetylab/ShadowSecurityScanner/cmd/triage@latest
+
+triage < findings.json                  # ranked table
+triage -format sarif < findings.json > results.sarif
+```
+
+```text
+RANK  CVE                 SEVERITY   CVSS    KEV     EPSS
+1     CVE-2021-44228      CRITICAL   10.0    KEV     1.00
+2     CVE-2017-0144       HIGH       8.1     KEV     0.99
+3     CVE-2099-0001       CRITICAL   9.8     -       0.00
+```
+
 ## Build the libraries
 
 ```bash
