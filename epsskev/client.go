@@ -46,7 +46,7 @@ func NewClient(opts ...Option) *Client {
 		HTTP:        &http.Client{Timeout: 30 * time.Second},
 		EPSSBaseURL: DefaultEPSSBaseURL,
 		KEVURL:      DefaultKEVURL,
-		UserAgent:   "epss-kev-prioritizer/1.0 (+https://github.com/safetylab/ShadowSecurityScanner)",
+		UserAgent:   "epss-kev-prioritizer/1.0 (+https://github.com/safetylab/shadowsecurityscanner)",
 	}
 	for _, o := range opts {
 		o(c)

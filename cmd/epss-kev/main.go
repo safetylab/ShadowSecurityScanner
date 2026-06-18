@@ -18,7 +18,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/safetylab/ShadowSecurityScanner/epsskev"
+	"github.com/safetylab/shadowsecurityscanner/epsskev"
 )
 
 func main() {

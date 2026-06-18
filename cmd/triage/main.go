@@ -20,9 +20,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/safetylab/ShadowSecurityScanner/epsskev"
-	"github.com/safetylab/ShadowSecurityScanner/findings"
-	"github.com/safetylab/ShadowSecurityScanner/sarif"
+	"github.com/safetylab/shadowsecurityscanner/epsskev"
+	"github.com/safetylab/shadowsecurityscanner/findings"
+	"github.com/safetylab/shadowsecurityscanner/sarif"
 )
 
 func main() {
