@@ -3,8 +3,8 @@
 ![Go](https://img.shields.io/badge/Go-1.22%2B-00ADD8?logo=go&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-blue)
-![Latest release](https://img.shields.io/github/v/release/safetylab/shadowsecurityscanner)
-![Stars](https://img.shields.io/github/stars/safetylab/shadowsecurityscanner?style=social)
+![Latest release](https://img.shields.io/github/v/release/safetylab/ShadowSecurityScanner)
+![Stars](https://img.shields.io/github/stars/safetylab/ShadowSecurityScanner?style=social)
 
 **ShadowSecurityScanner** is a free **penetration testing tool** and **network
 vulnerability scanner**. It performs port scanning, service & OS fingerprinting, and
@@ -22,7 +22,7 @@ self-contained desktop app for **Windows, macOS and Linux**. No cloud, no agents
 ## Download
 
 Get the latest build for your platform from the
-[**Releases page**](https://github.com/safetylab/shadowsecurityscanner/releases/latest):
+[**Releases page**](https://github.com/safetylab/ShadowSecurityScanner/releases/latest):
 
 | Platform | File |
 |---|---|
@@ -45,7 +45,7 @@ Fetch FIRST.org EPSS scores and CISA KEV status for any list of CVEs and sort th
 fix-first (`KEV → EPSS → CVSS`).
 
 ```bash
-go install github.com/safetylab/shadowsecurityscanner/cmd/epss-kev@latest
+go install github.com/safetylab/ShadowSecurityScanner/cmd/epss-kev@latest
 
 epss-kev CVE-2021-44228 CVE-2017-0144 CVE-2024-6387
 # RANK  CVE                 EPSS    KEV     PERCENTILE
@@ -54,7 +54,7 @@ epss-kev CVE-2021-44228 CVE-2017-0144 CVE-2024-6387
 ```
 
 ```go
-import epsskev "github.com/safetylab/shadowsecurityscanner/epsskev"
+import epsskev "github.com/safetylab/ShadowSecurityScanner/epsskev"
 
 ranked, _ := epsskev.EnrichAndPrioritise(ctx, epsskev.NewClient(), findings)
 ```
@@ -65,12 +65,12 @@ Convert vulnerability findings into a SARIF 2.1.0 document for GitHub code scann
 with per-CVE rules, NVD `helpUri` and GitHub `security-severity`.
 
 ```bash
-go install github.com/safetylab/shadowsecurityscanner/cmd/vuln-sarif@latest
+go install github.com/safetylab/ShadowSecurityScanner/cmd/vuln-sarif@latest
 vuln-sarif < findings.json > results.sarif
 ```
 
 ```go
-import sarif "github.com/safetylab/shadowsecurityscanner/sarif"
+import sarif "github.com/safetylab/ShadowSecurityScanner/sarif"
 
 out, _ := sarif.Marshal(findings, sarif.DefaultTool)
 ```
@@ -82,7 +82,7 @@ Read vulnerability findings as JSON (see
 EPSS + CISA KEV, sort fix-first, and print a ranked table or a SARIF report.
 
 ```bash
-go install github.com/safetylab/shadowsecurityscanner/cmd/triage@latest
+go install github.com/safetylab/ShadowSecurityScanner/cmd/triage@latest
 
 triage < findings.json                  # ranked table
 triage -format sarif < findings.json > results.sarif
@@ -98,8 +98,8 @@ RANK  CVE                 SEVERITY   CVSS    KEV     EPSS
 ## Build the libraries
 
 ```bash
-git clone https://github.com/safetylab/shadowsecurityscanner.git
-cd shadowsecurityscanner
+git clone https://github.com/safetylab/ShadowSecurityScanner.git
+cd ShadowSecurityScanner
 go test ./...
 go build ./...
 ```

@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/safetylab/shadowsecurityscanner/epsskev"
+	"github.com/safetylab/ShadowSecurityScanner/epsskev"
 )
 
 // mockEnricher implements epsskev.Enricher with canned data — no network.

@@ -7,8 +7,8 @@ package findings
 import (
 	"context"
 
-	"github.com/safetylab/shadowsecurityscanner/epsskev"
-	"github.com/safetylab/shadowsecurityscanner/sarif"
+	"github.com/safetylab/ShadowSecurityScanner/epsskev"
+	"github.com/safetylab/ShadowSecurityScanner/sarif"
 )
 
 // Finding is the canonical input shape. It is intentionally minimal and JSON-friendly;

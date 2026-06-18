@@ -19,7 +19,7 @@ import (
 	"io"
 	"os"
 
-	vulnsarif "github.com/safetylab/shadowsecurityscanner/sarif"
+	vulnsarif "github.com/safetylab/ShadowSecurityScanner/sarif"
 )
 
 // jsonFinding is the lowercase-friendly input shape.

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/safetylab/shadowsecurityscanner/findings.schema.json",
+  "$id": "https://github.com/safetylab/ShadowSecurityScanner/findings.schema.json",
   "title": "ShadowSecurityScanner finding",
   "description": "Canonical vulnerability-finding shape consumed by the triage CLI and the open-source components.",
   "type": "array",
