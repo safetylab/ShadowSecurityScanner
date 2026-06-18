@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/safetylab/ShadowSecurityScanner/findings.schema.json",
+  "title": "ShadowSecurityScanner finding",
+  "description": "Canonical vulnerability-finding shape consumed by the triage CLI and the open-source components.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["cve"],
+    "additionalProperties": false,
+    "properties": {
+      "cve": {
+        "type": "string",
+        "pattern": "^CVE-[0-9]{4}-[0-9]{4,}$",
+        "description": "CVE identifier, e.g. CVE-2021-44228."
+      },
+      "title": { "type": "string", "description": "Short human-readable title." },
+      "severity": {
+        "type": "string",
+        "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW", "INFO"],
+        "description": "Qualitative severity label."
+      },
+      "cvss": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 10,
+        "description": "CVSS base score."
+      },
+      "target": { "type": "string", "description": "Host or URL where the finding was observed." },
+      "description": { "type": "string", "description": "Longer description or evidence." }
+    }
+  }
+}
