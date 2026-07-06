@@ -2,7 +2,7 @@
 // tools like GitHub code scanning can ingest.
 //
 // It is a small, dependency-free helper extracted from ShadowSecurityScanner
-// (https://andriigordiienko.github.io/ShadowSecurityScanner-site/): give it a list
+// (https://shadowsecurityscanner.com/): give it a list
 // of findings (CVE, severity, target, optional EPSS/KEV signals) and it produces a
 // valid SARIF document with per-CVE rules and GitHub-compatible security-severity.
 package sarif
@@ -48,7 +48,7 @@ type ToolInfo struct {
 var DefaultTool = ToolInfo{
 	Name:           "ShadowSecurityScanner",
 	Version:        "1.1.1",
-	InformationURI: "https://andriigordiienko.github.io/ShadowSecurityScanner-site/",
+	InformationURI: "https://shadowsecurityscanner.com/",
 }
 
 // sarifLevel maps a severity to a SARIF result level.

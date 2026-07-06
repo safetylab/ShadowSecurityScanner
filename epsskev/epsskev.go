@@ -8,7 +8,7 @@
 //
 // It turns a flat list of findings into a "fix-first" order: KEV → EPSS → CVSS.
 // This is the prioritisation model used by ShadowSecurityScanner
-// (https://andriigordiienko.github.io/ShadowSecurityScanner-site/), extracted as a
+// (https://shadowsecurityscanner.com/), extracted as a
 // standalone, dependency-free library.
 package epsskev
 

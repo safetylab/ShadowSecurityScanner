@@ -12,9 +12,9 @@ thousands of catalogued network and web checks, then ranks every finding by real
 exploit probability — **EPSS** (FIRST.org) + **CISA KEV** — not just raw CVSS. A single
 self-contained desktop app for **Windows, macOS and Linux**. No cloud, no agents, no telemetry.
 
-- 🌐 **Website & docs:** https://andriigordiienko.github.io/ShadowSecurityScanner-site/
-- 📊 **vs Nessus & OpenVAS:** https://andriigordiienko.github.io/ShadowSecurityScanner-site/compare/
-- 📘 **Guides:** https://andriigordiienko.github.io/ShadowSecurityScanner-site/guides/
+- 🌐 **Website & docs:** https://shadowsecurityscanner.com/
+- 📊 **vs Nessus & OpenVAS:** https://shadowsecurityscanner.com/compare/
+- 📘 **Guides:** https://shadowsecurityscanner.com/guides/
 
 > **Open-core.** The desktop app is free to use; its core exploit-aware components are
 > open-source (MIT) and live in this repository — read, audit and reuse them below.
