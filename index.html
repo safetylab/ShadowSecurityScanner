@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>ShadowSecurityScanner — Free Network Vulnerability Scanner (Nessus/OpenVAS alternative)</title>
+  <meta name="description" content="ShadowSecurityScanner is a free, self-hosted, cross-platform network vulnerability scanner. Agentless CVE detection across 100+ services with CISA KEV & EPSS prioritization. A modern Nessus and OpenVAS alternative for Windows, Linux and macOS." />
+  <meta name="keywords" content="network vulnerability scanner, free vulnerability scanner, self-hosted vulnerability scanner, CVE scanner, Nessus alternative, OpenVAS alternative, agentless security scanner, KEV EPSS, port scanner, cross-platform vulnerability scanner" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <meta name="author" content="ShadowSecurityScanner" />
+  <meta name="theme-color" content="#0a0d13" />
+  <link rel="canonical" href="https://shadowsecurityscanner.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ShadowSecurityScanner" />
+  <meta property="og:title" content="ShadowSecurityScanner — Free Network Vulnerability Scanner" />
+  <meta property="og:description" content="Agentless, self-hosted CVE detection across 100+ services with CISA KEV & EPSS prioritization. A modern Nessus/OpenVAS alternative for Windows, Linux and macOS." />
+  <meta property="og:url" content="https://shadowsecurityscanner.com/" />
+  <meta property="og:image" content="https://shadowsecurityscanner.com/og-image.svg" />
+  <meta property="og:image:alt" content="ShadowSecurityScanner — free network vulnerability scanner" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ShadowSecurityScanner — Free Network Vulnerability Scanner" />
+  <meta name="twitter:description" content="Agentless, self-hosted CVE detection across 100+ services with CISA KEV & EPSS prioritization. A modern Nessus/OpenVAS alternative." />
+  <meta name="twitter:image" content="https://shadowsecurityscanner.com/og-image.svg" />
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <!-- Structured data: the software itself -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ShadowSecurityScanner",
+    "applicationCategory": "SecurityApplication",
+    "operatingSystem": "Windows, Linux, macOS",
+    "softwareVersion": "1.2.1",
+    "description": "A free, self-hosted, cross-platform network vulnerability scanner. Agentless CVE detection across 100+ services and protocols, with CISA KEV and FIRST EPSS prioritization. A modern alternative to Nessus and OpenVAS.",
+    "url": "https://shadowsecurityscanner.com/",
+    "downloadUrl": "https://github.com/safetylab/ShadowSecurityScanner/releases/latest",
+    "license": "https://opensource.org/licenses/MIT",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "featureList": [
+      "Agentless network vulnerability scanning",
+      "Version-bounded CVE detection for 100+ products",
+      "CISA KEV and FIRST EPSS risk prioritization",
+      "Read-only, non-destructive detection",
+      "SBOM (CycloneDX) and STIX export",
+      "PCI DSS, CIS and NIST compliance mapping"
+    ]
+  }
+  </script>
+
+  <!-- Structured data: FAQ for answer engines / AI search -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is ShadowSecurityScanner?",
+        "acceptedAnswer": { "@type": "Answer", "text": "ShadowSecurityScanner is a free, self-hosted network vulnerability scanner. It fingerprints services on your network, matches their versions against a curated CVE database, and prioritizes findings using CISA KEV and FIRST EPSS. It runs as a single cross-platform desktop app on Windows, Linux and macOS." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is ShadowSecurityScanner free?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. ShadowSecurityScanner is free to download and use, with MIT-licensed binaries for Windows, Linux and macOS. There is no paid tier, no seat licensing and no cloud account required." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is it different from Nessus or OpenVAS?",
+        "acceptedAnswer": { "@type": "Answer", "text": "ShadowSecurityScanner is a lightweight, self-hosted single binary with no server to stand up, no license keys and no telemetry. Detection is read-only and agentless, and every finding is prioritized with CISA KEV and EPSS so you triage exploited vulnerabilities first. It is a modern alternative to Nessus and OpenVAS for teams that want fast, private scans." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it safe to run against production systems?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Detection is read-only and non-destructive: the scanner observes banners, versions and exposed endpoints rather than sending exploits. It never writes, executes or retrieves sensitive data beyond a benign confirmation marker." }
+      },
+      {
+        "@type": "Question",
+        "name": "How many vulnerabilities can it detect?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The bundled, version-bounded CVE pack covers more than 6,900 CVEs across 100+ products and services, and is refreshed automatically from NVD, CISA KEV and FIRST EPSS. Detection also includes named high-profile CVEs, exposed-service checks and misconfiguration findings." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it need an agent installed on targets?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Scanning is agentless and network-based. You point it at a host or range and it identifies services and vulnerabilities over the network — nothing is installed on the targets." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root{
+      --bg:#06080b; --bg2:#0a0d13; --card:#121620; --line:#1e2633;
+      --fg:#e6edf6; --mut:#93a1b5; --accent:#3fe0c5; --accent2:#5aa0ff; --crit:#ff5c6c;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(120% 90% at 50% -10%,#121620 0%,#0a0d13 55%,#06080b 100%);
+      color:var(--fg);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+    header{position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);
+      background:rgba(6,8,11,.7);border-bottom:1px solid var(--line)}
+    nav{display:flex;align-items:center;gap:22px;height:60px}
+    .brand{font-weight:700;letter-spacing:.3px;color:var(--fg)}
+    .brand b{color:var(--accent)}
+    nav .sp{flex:1}
+    nav a{color:var(--mut);font-size:14px}
+    .btn{display:inline-block;background:linear-gradient(180deg,var(--accent),#2bbfa6);color:#03211c !important;
+      font-weight:700;padding:10px 18px;border-radius:10px;text-decoration:none !important}
+    .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--fg) !important}
+    section{padding:64px 0;border-bottom:1px solid var(--line)}
+    h1{font-size:clamp(30px,5vw,50px);line-height:1.1;margin:0 0 16px}
+    h1 .g{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    h2{font-size:clamp(22px,3.4vw,32px);margin:0 0 8px}
+    h3{margin:0 0 6px;font-size:17px}
+    .lead{font-size:19px;color:var(--mut);max-width:720px}
+    .hero{padding-top:56px}
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+    .pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;color:var(--mut);font-size:13px}
+    .pill{border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:var(--bg2)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:26px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+    .card p{color:var(--mut);margin:0;font-size:15px}
+    .muted{color:var(--mut)}
+    .steps{counter-reset:s;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:26px}
+    .step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+    .step:before{counter-increment:s;content:counter(s);display:inline-grid;place-items:center;width:30px;height:30px;
+      border-radius:8px;background:var(--accent);color:#03211c;font-weight:800;margin-bottom:10px}
+    table{width:100%;border-collapse:collapse;margin-top:22px;font-size:15px}
+    th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line)}
+    th{color:var(--mut);font-weight:600}
+    td .yes{color:var(--accent)} td .no{color:var(--mut)}
+    details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0 18px;margin:10px 0}
+    summary{cursor:pointer;font-weight:600;padding:16px 0;list-style:none}
+    summary::-webkit-details-marker{display:none}
+    details[open] summary{border-bottom:1px solid var(--line)}
+    details p{color:var(--mut);padding:4px 0 18px}
+    .dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:24px}
+    .dl a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;color:var(--fg)}
+    .dl a:hover{border-color:var(--accent);text-decoration:none}
+    .dl b{display:block;color:var(--accent)}
+    footer{padding:40px 0;color:var(--mut);font-size:14px}
+    .center{text-align:center}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap"><nav>
+      <span class="brand"><b>Shadow</b>SecurityScanner</span>
+      <span class="sp"></span>
+      <a href="#features">Features</a>
+      <a href="#compare">vs Nessus/OpenVAS</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://github.com/safetylab/ShadowSecurityScanner/releases/latest" class="btn">Download</a>
+    </nav></div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" style="border-bottom:1px solid var(--line)">
+      <h1>The free <span class="g">network vulnerability scanner</span> that prioritizes what's actually exploited.</h1>
+      <p class="lead">ShadowSecurityScanner is a self-hosted, agentless scanner that fingerprints your services, matches their versions against 6,900+ CVEs, and ranks findings by <strong>CISA KEV</strong> and <strong>EPSS</strong> — so you fix exploited vulnerabilities first. A modern <strong>Nessus</strong> and <strong>OpenVAS</strong> alternative for Windows, Linux and macOS.</p>
+      <div class="cta">
+        <a class="btn" href="https://github.com/safetylab/ShadowSecurityScanner/releases/latest">Download free</a>
+        <a class="btn ghost" href="#how">How it works</a>
+      </div>
+      <div class="pills">
+        <span class="pill">Free &amp; self-hosted</span>
+        <span class="pill">Agentless</span>
+        <span class="pill">Read-only / non-destructive</span>
+        <span class="pill">100+ services fingerprinted</span>
+        <span class="pill">KEV + EPSS prioritized</span>
+        <span class="pill">Windows · Linux · macOS</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>What is ShadowSecurityScanner?</h2>
+      <p class="lead">It is a modern network vulnerability scanner: point it at a host or IP range, and it discovers open services, identifies each product and version over the network, and reports the CVEs that affect them — with exploited-in-the-wild vulnerabilities surfaced first. No server to deploy, no license keys, no cloud account, no telemetry.</p>
+    </section>
+
+    <section id="features">
+      <h2>Features</h2>
+      <p class="muted">Everything you need for fast, private, prioritized vulnerability assessment.</p>
+      <div class="grid">
+        <div class="card"><h3>Version-bounded CVE detection</h3><p>A curated pack of 6,900+ CVEs across 100+ products (web servers, databases, VPNs, message brokers, ICS and more), matched against detected versions to cut false positives.</p></div>
+        <div class="card"><h3>KEV &amp; EPSS prioritization</h3><p>Every finding is annotated with CISA Known Exploited Vulnerabilities status and FIRST EPSS exploit probability, so you triage what attackers actually use.</p></div>
+        <div class="card"><h3>Agentless &amp; read-only</h3><p>Detection observes banners, versions and exposed endpoints — never sends exploits. Safe to run against production; nothing is installed on targets.</p></div>
+        <div class="card"><h3>Deep protocol coverage</h3><p>HTTP/TLS, SMB, DNS, SNMP, LDAP, Kerberos, databases (MySQL, PostgreSQL, MongoDB, Redis), message queues, and ICS/OT protocols — via a plugin architecture.</p></div>
+        <div class="card"><h3>SBOM &amp; STIX export</h3><p>Export findings and detected components as CycloneDX SBOM or STIX for your inventory, ticketing and threat-intel pipelines.</p></div>
+        <div class="card"><h3>Compliance mapping</h3><p>Findings map to PCI DSS, CIS and NIST controls, so a scan turns straight into audit-ready evidence.</p></div>
+        <div class="card"><h3>Always-fresh intel</h3><p>The CVE, KEV and EPSS data is refreshed automatically from NVD, CISA and FIRST — new exploited vulnerabilities show up without waiting for an app update.</p></div>
+        <div class="card"><h3>Single cross-platform binary</h3><p>One fast desktop app for Windows (x64/arm64), Linux (x64/arm64) and macOS. No dependencies, no runtime to install.</p></div>
+      </div>
+    </section>
+
+    <section id="compare">
+      <h2>ShadowSecurityScanner vs Nessus vs OpenVAS</h2>
+      <p class="muted">A lightweight, private alternative — no server, no license keys, no telemetry.</p>
+      <table>
+        <thead><tr><th>Capability</th><th>ShadowSecurityScanner</th><th>Nessus (free)</th><th>OpenVAS</th></tr></thead>
+        <tbody>
+          <tr><td>Price</td><td><span class="yes">Free</span></td><td>Limited free / paid</td><td><span class="yes">Free</span></td></tr>
+          <tr><td>Setup</td><td><span class="yes">Single binary</span></td><td>Installer + service</td><td>Server stack</td></tr>
+          <tr><td>Agentless network scan</td><td><span class="yes">Yes</span></td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+          <tr><td>KEV + EPSS built-in prioritization</td><td><span class="yes">Yes</span></td><td>Partial</td><td class="no">Limited</td></tr>
+          <tr><td>Read-only / non-destructive by design</td><td><span class="yes">Yes</span></td><td>Configurable</td><td>Configurable</td></tr>
+          <tr><td>Runs fully offline / private</td><td><span class="yes">Yes</span></td><td class="no">Account required</td><td class="yes">Yes</td></tr>
+          <tr><td>SBOM (CycloneDX) export</td><td><span class="yes">Yes</span></td><td class="no">No</td><td class="no">No</td></tr>
+        </tbody>
+      </table>
+      <p class="muted" style="font-size:13px;margin-top:14px">Comparison reflects typical usage; features of other tools change over time — verify against their current documentation.</p>
+    </section>
+
+    <section id="how">
+      <h2>How it works</h2>
+      <div class="steps">
+        <div class="step"><h3>Point it at a target</h3><p>Enter a host, hostname or IP range. No agents, no credentials required for network detection.</p></div>
+        <div class="step"><h3>Discover &amp; fingerprint</h3><p>The engine finds open services and identifies each product and version from banners and responses.</p></div>
+        <div class="step"><h3>Match &amp; prioritize</h3><p>Versions are matched to the CVE pack; results are ranked by KEV and EPSS so the riskiest come first.</p></div>
+        <div class="step"><h3>Report &amp; export</h3><p>Review findings in the dashboard, then export as SBOM/STIX or map them to PCI DSS, CIS and NIST.</p></div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <h2>Frequently asked questions</h2>
+      <details open><summary>What is ShadowSecurityScanner?</summary><p>A free, self-hosted network vulnerability scanner. It fingerprints services on your network, matches their versions against a curated CVE database, and prioritizes findings using CISA KEV and FIRST EPSS. It runs as a single cross-platform desktop app on Windows, Linux and macOS.</p></details>
+      <details><summary>Is ShadowSecurityScanner free?</summary><p>Yes — free to download and use, with MIT-licensed binaries for Windows, Linux and macOS. No paid tier, no seat licensing, no cloud account required.</p></details>
+      <details><summary>How is it different from Nessus or OpenVAS?</summary><p>It is a lightweight, self-hosted single binary with no server to stand up, no license keys and no telemetry. Detection is read-only and agentless, and every finding is prioritized with CISA KEV and EPSS so you triage exploited vulnerabilities first.</p></details>
+      <details><summary>Is it safe to run against production systems?</summary><p>Yes. Detection is read-only and non-destructive: it observes banners, versions and exposed endpoints rather than sending exploits, and never writes, executes or retrieves sensitive data beyond a benign confirmation marker.</p></details>
+      <details><summary>How many vulnerabilities can it detect?</summary><p>The bundled version-bounded CVE pack covers more than 6,900 CVEs across 100+ products and services, refreshed automatically from NVD, CISA KEV and FIRST EPSS, plus named high-profile CVEs and exposed-service checks.</p></details>
+      <details><summary>Does it need an agent on the targets?</summary><p>No. Scanning is agentless and network-based — you point it at a host or range and it identifies services and vulnerabilities over the network.</p></details>
+    </section>
+
+    <section id="download" class="center">
+      <h2>Download ShadowSecurityScanner</h2>
+      <p class="muted">Free. No account. Pick your platform.</p>
+      <div class="dl">
+        <a href="https://github.com/safetylab/ShadowSecurityScanner/releases/latest"><b>Windows x64</b>ShadowSecurityScanner-windows-amd64.exe</a>
+        <a href="https://github.com/safetylab/ShadowSecurityScanner/releases/latest"><b>Windows ARM64</b>ShadowSecurityScanner-windows-arm64.exe</a>
+        <a href="https://github.com/safetylab/ShadowSecurityScanner/releases/latest"><b>macOS (Apple Silicon)</b>ShadowSecurityScanner-macos-arm64.dmg</a>
+        <a href="https://github.com/safetylab/ShadowSecurityScanner/releases/latest"><b>Linux x64</b>ShadowSecurityScanner-linux-amd64</a>
+        <a href="https://github.com/safetylab/ShadowSecurityScanner/releases/latest"><b>Linux ARM64</b>ShadowSecurityScanner-linux-arm64</a>
+        <a href="https://github.com/safetylab/ShadowSecurityScanner/releases"><b>All releases</b>Changelog &amp; older versions</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap center">
+    <p><span class="brand"><b>Shadow</b>SecurityScanner</span> — free network vulnerability scanner · Windows · Linux · macOS<br/>
+    <a href="https://github.com/safetylab/ShadowSecurityScanner">GitHub</a> ·
+    <a href="https://github.com/safetylab/ShadowSecurityScanner/releases/latest">Download</a> ·
+    <a href="#faq">FAQ</a></p>
+  </footer>
+</body>
+</html>

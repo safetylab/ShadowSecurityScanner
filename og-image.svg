@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#121620"/>
+      <stop offset="0.55" stop-color="#0a0d13"/>
+      <stop offset="1" stop-color="#06080b"/>
+    </linearGradient>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3fe0c5"/>
+      <stop offset="1" stop-color="#5aa0ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g transform="translate(96,150)">
+    <path d="M60 0 L120 24 V72 C120 108 93 132 60 144 C27 132 0 108 0 72 V24 Z"
+          fill="none" stroke="url(#acc)" stroke-width="7" stroke-linejoin="round"/>
+    <circle cx="54" cy="60" r="24" fill="none" stroke="url(#acc)" stroke-width="7"/>
+    <line x1="72" y1="78" x2="96" y2="102" stroke="url(#acc)" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <text x="270" y="230" font-family="ui-sans-serif,system-ui,Segoe UI,Roboto,sans-serif" font-size="64" font-weight="800" fill="#e6edf6">ShadowSecurityScanner</text>
+  <text x="272" y="300" font-family="ui-sans-serif,system-ui,Segoe UI,Roboto,sans-serif" font-size="34" font-weight="600" fill="url(#acc)">Free network vulnerability scanner</text>
+  <text x="98" y="430" font-family="ui-sans-serif,system-ui,Segoe UI,Roboto,sans-serif" font-size="30" fill="#93a1b5">Agentless CVE detection · KEV + EPSS prioritized · read-only</text>
+  <text x="98" y="480" font-family="ui-sans-serif,system-ui,Segoe UI,Roboto,sans-serif" font-size="30" fill="#93a1b5">6,900+ CVEs · 100+ services · Windows · Linux · macOS</text>
+  <text x="98" y="556" font-family="ui-sans-serif,system-ui,Segoe UI,Roboto,sans-serif" font-size="26" font-weight="700" fill="#3fe0c5">A modern Nessus / OpenVAS alternative</text>
+</svg>
