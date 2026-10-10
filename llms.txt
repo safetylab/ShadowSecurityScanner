@@ -1,0 +1,26 @@
+# ShadowSecurityScanner
+
+> A free, self-hosted, cross-platform network vulnerability scanner. Agentless CVE detection across 100+ services and protocols, with CISA KEV and FIRST EPSS prioritization. A modern alternative to Nessus and OpenVAS for Windows, Linux and macOS.
+
+ShadowSecurityScanner points at a host or IP range, discovers open services, fingerprints each product and version over the network, and reports the CVEs that affect them — surfacing exploited-in-the-wild vulnerabilities first via CISA KEV and FIRST EPSS. Detection is read-only and non-destructive (it observes rather than exploits). It ships as a single desktop binary with no server to deploy, no license keys, no cloud account and no telemetry.
+
+## Key facts
+- Price / license: Free; MIT-licensed binaries.
+- Platforms: Windows (x64 and ARM64), Linux (x64 and ARM64), macOS (Apple Silicon).
+- Coverage: 6,900+ CVEs across 100+ products and services; data refreshed automatically from NVD, CISA KEV and FIRST EPSS.
+- Detection model: agentless, network-based, read-only / non-destructive.
+- Prioritization: CISA Known Exploited Vulnerabilities (KEV) and EPSS exploit probability on every finding.
+- Exports: CycloneDX SBOM and STIX; compliance mapping to PCI DSS, CIS and NIST.
+- Category: network vulnerability scanner, CVE scanner, agentless security scanner, Nessus alternative, OpenVAS alternative.
+
+## Links
+- Home: https://shadowsecurityscanner.com/
+- Download (latest): https://github.com/safetylab/ShadowSecurityScanner/releases/latest
+- All releases and changelog: https://github.com/safetylab/ShadowSecurityScanner/releases
+
+## FAQ
+- Is it free? Yes — free to download and use, MIT-licensed binaries, no paid tier or account.
+- Is it safe against production? Yes — detection is read-only and non-destructive; it never sends exploits.
+- Does it need an agent on targets? No — scanning is agentless and network-based.
+- How is it different from Nessus or OpenVAS? A single self-hosted binary with no server or license keys, built-in KEV and EPSS prioritization, and it runs fully offline and private.
+- How many vulnerabilities does it detect? 6,900+ CVEs across 100+ products, refreshed from NVD, CISA KEV and FIRST EPSS.
