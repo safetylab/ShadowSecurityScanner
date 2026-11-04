@@ -68,15 +68,41 @@ func (c *Client) fetchEPSSBatch(ctx context.Context, cves []string, out map[stri
 		return fmt.Errorf("epss API: unexpected status %d", resp.StatusCode)
 	}
 
+	limited, counter := c.limitedBody(resp.Body)
+
 	var body epssResponse
-	if err := json.NewDecoder(resp.Body).Decode(&body); err != nil {
+	if err := json.NewDecoder(limited).Decode(&body); err != nil {
 		return fmt.Errorf("epss decode: %w", err)
 	}
+	if c.truncated(counter.n) {
+		return fmt.Errorf("epss response exceeded %d bytes", c.responseLimit())
+	}
 	for _, d := range body.Data {
-		score := EPSSScore{CVE: normaliseCVE(d.CVE), Date: d.Date}
-		score.EPSS, _ = strconv.ParseFloat(d.EPSS, 64)
-		score.Percentile, _ = strconv.ParseFloat(d.Percentile, 64)
-		out[score.CVE] = score
+		cve := normaliseCVE(d.CVE)
+		if !isCVE(cve) {
+			continue
+		}
+
+		// A score that will not parse is dropped rather than defaulted to
+		// zero. Zero is not "unknown" here: it sorts the finding to the
+		// bottom of a fix-first ranking, so a parsing failure would quietly
+		// understate risk, which is the one direction this tool must never
+		// fail in.
+		epss, err := strconv.ParseFloat(d.EPSS, 64)
+		if err != nil {
+			continue
+		}
+		percentile, err := strconv.ParseFloat(d.Percentile, 64)
+		if err != nil {
+			continue
+		}
+
+		out[cve] = EPSSScore{
+			CVE:        cve,
+			EPSS:       epss,
+			Percentile: percentile,
+			Date:       d.Date,
+		}
 	}
 	return nil
 }

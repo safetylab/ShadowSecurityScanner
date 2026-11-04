@@ -55,14 +55,22 @@ func (c *Client) FetchKEV(ctx context.Context) (map[string]KEVEntry, error) {
 		return nil, fmt.Errorf("kev feed: unexpected status %d", resp.StatusCode)
 	}
 
+	limited, counter := c.limitedBody(resp.Body)
+
 	var feed kevFeed
-	if err := json.NewDecoder(resp.Body).Decode(&feed); err != nil {
+	if err := json.NewDecoder(limited).Decode(&feed); err != nil {
 		return nil, fmt.Errorf("kev decode: %w", err)
+	}
+	if c.truncated(counter.n) {
+		return nil, fmt.Errorf("kev feed exceeded %d bytes", c.responseLimit())
 	}
 
 	out := make(map[string]KEVEntry, len(feed.Vulnerabilities))
 	for _, v := range feed.Vulnerabilities {
 		cve := normaliseCVE(v.CveID)
+		if !isCVE(cve) {
+			continue
+		}
 		out[cve] = KEVEntry{
 			CVE:               cve,
 			VendorProject:     v.VendorProject,

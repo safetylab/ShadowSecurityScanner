@@ -14,9 +14,14 @@ package epsskev
 
 import (
 	"context"
+	"regexp"
 	"sort"
 	"strings"
 )
+
+// cvePattern is the CVE ID format: four-digit year, then a sequence number of
+// at least four digits.
+var cvePattern = regexp.MustCompile(`^CVE-\d{4}-\d{4,}$`)
 
 // Finding is a vulnerability finding keyed by its CVE ID. CVSS and Severity are
 // optional and only used as tie-breakers during prioritisation.
@@ -52,6 +57,17 @@ func normaliseCVE(cve string) string {
 	return strings.ToUpper(strings.TrimSpace(cve))
 }
 
+// isCVE reports whether id is a well-formed CVE identifier.
+//
+// Checked where the value leaves this package: it goes into the EPSS query and
+// becomes a rule ID in SARIF output that other tools ingest. url.Values
+// escapes it on the way out, so this is about not sending or publishing
+// nonsense rather than preventing injection. Normalisation stays separate,
+// because callers legitimately use normaliseCVE on identifiers this rejects.
+func isCVE(id string) bool {
+	return cvePattern.MatchString(id)
+}
+
 // Enrich attaches EPSS and KEV signals to each finding. It performs one batched
 // EPSS lookup and one KEV catalog fetch, then merges the results. The returned
 // slice preserves the input order; call Prioritise to sort it.
@@ -60,7 +76,9 @@ func Enrich(ctx context.Context, e Enricher, findings []Finding) ([]EnrichedFind
 	seen := make(map[string]struct{}, len(findings))
 	for _, f := range findings {
 		c := normaliseCVE(f.CVE)
-		if c == "" {
+		// Only well-formed identifiers are worth asking the API about;
+		// anything else simply stays unenriched in the output.
+		if !isCVE(c) {
 			continue
 		}
 		if _, dup := seen[c]; !dup {

@@ -10,6 +10,7 @@ package sarif
 import (
 	"encoding/json"
 	"fmt"
+	"slices"
 	"sort"
 	"strings"
 )
@@ -49,6 +50,55 @@ var DefaultTool = ToolInfo{
 	Name:           "ShadowSecurityScanner",
 	Version:        "1.1.1",
 	InformationURI: "https://shadowsecurityscanner.com/",
+}
+
+// unsafeSchemes are schemes an artifact location must never carry into a
+// report another tool will render or follow.
+var unsafeSchemes = []string{
+	"file:", "javascript:", "data:", "vbscript:", "jar:",
+}
+
+// safeURI returns target if it is usable as a SARIF artifact location, and ""
+// if it is not.
+//
+// Consumers such as GitHub code scanning annotate files by this URI, so a
+// crafted findings file carrying "../../.github/workflows/ci.yml" would place
+// an annotation on an arbitrary path in whichever repository the report is
+// uploaded to. Absolute paths, parent-directory segments and non-web schemes
+// are therefore dropped; http(s) URLs, hostnames and plain relative paths —
+// what a scanner actually reports — are kept.
+func safeURI(target string) string {
+	uri := strings.TrimSpace(target)
+	if uri == "" {
+		return ""
+	}
+
+	lower := strings.ToLower(uri)
+	for _, scheme := range unsafeSchemes {
+		if strings.HasPrefix(lower, scheme) {
+			return ""
+		}
+	}
+
+	if strings.HasPrefix(lower, "http://") || strings.HasPrefix(lower, "https://") {
+		return uri
+	}
+
+	// Anything else must be a relative location: no other scheme, no absolute
+	// path, no escaping upwards.
+	if strings.Contains(uri, "://") || strings.HasPrefix(uri, "/") ||
+		strings.HasPrefix(uri, `\`) {
+		return ""
+	}
+
+	segments := strings.FieldsFunc(uri, func(r rune) bool {
+		return r == '/' || r == '\\'
+	})
+	if slices.Contains(segments, "..") {
+		return ""
+	}
+
+	return uri
 }
 
 // sarifLevel maps a severity to a SARIF result level.
@@ -102,10 +152,10 @@ func Convert(findings []Finding, tool ToolInfo) *Log {
 			Level:     sarifLevel(f.Severity),
 			Message:   Message{Text: text},
 		}
-		if f.Target != "" {
+		if uri := safeURI(f.Target); uri != "" {
 			res.Locations = []Location{{
 				PhysicalLocation: PhysicalLocation{
-					ArtifactLocation: ArtifactLocation{URI: f.Target},
+					ArtifactLocation: ArtifactLocation{URI: uri},
 				},
 			}}
 		}
