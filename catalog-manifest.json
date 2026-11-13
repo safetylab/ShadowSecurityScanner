@@ -1,0 +1,53 @@
+{
+  "latest_version": 20261111,
+  "packs": [
+    {
+      "source": "cisa_kev",
+      "version": 20261110,
+      "file": "kev.json.gz",
+      "sha256": "2bdd83a5c22cb7f4c88c60f930017bed236cb8381a2cf6fc674ee74f3ca5869a",
+      "sig": "7a8aYXB9RUbT3GLKmqTZJT8rJqIdgSwpkafqfoT2cB8hx/irT1RWkr43MSkekjUaFm3oZDoGmePAB6aaLPpnBg==",
+      "entries": 1779
+    },
+    {
+      "source": "sss_chk_2007",
+      "version": 31,
+      "file": "sss_chk.json.gz",
+      "sha256": "71ded4499921d6da059df37acff52f7cd9e500ef3a29c9f93fd2289412dd9b1b",
+      "sig": "81zVre7fFpfZ2p1TVUPtJQYSfLHeGP7HlsleYQTq7woTecl1qfSe8ieYL8HSjSDc8AEjXUPkmuCFTKAD4Ns5AQ==",
+      "entries": 6967
+    },
+    {
+      "source": "nuclei",
+      "version": 20260635,
+      "file": "nuclei.json.gz",
+      "sha256": "51e78435494886586120ce8ae4e9ae0574d5180d33a5f2397b9f177bd3a7f335",
+      "sig": "TuznNhTra3QxUvgurySG4MLrHWJYOUGk6X0zvQU5tlSlgQR9+HpCzc2S1TBsVNcGdh+vGfZpdu+TJsGUPJaACg==",
+      "entries": 2326
+    },
+    {
+      "source": "nginx_advisories",
+      "version": 20260633,
+      "file": "nginx_advisories.json.gz",
+      "sha256": "b03a135e1f4fc383d9259b52c845c2433ba3923a9329e12d69945340cf583a7e",
+      "sig": "rR7ybilITTj8oAHVK6bjYJn2VJmUA4sBItK+LyiO3oGa9nkMFXwPMsGduCl+6P/UpWf+1lldUkm6SXaUepIUDQ==",
+      "entries": 3
+    },
+    {
+      "source": "exploitdb",
+      "version": 20261111,
+      "file": "exploitdb.json.gz",
+      "sha256": "082aabad777bbfd55c8ca04d87b13838eef8127e884fe5bccf9afe9996c565f1",
+      "sig": "V5dETv6kRMVUOCzxopo7czhcjHlCdJtjPSKlJduLusgzpfnsn30b+coCkeGQn4jobgeMO2NTzOZl3m2aXBI/DA==",
+      "entries": 25095
+    },
+    {
+      "source": "metasploit",
+      "version": 7266,
+      "file": "metasploit.json.gz",
+      "sha256": "1780ee9965c9e432a8483561fde9b6614aef0351342a4af02d35d3db9f73b4cd",
+      "sig": "9R8MFwai3H+N4lbHSlpD+N3WIV293C+vbG2dRpm8FDGic9YXOnvEj6rC2S7AUeTGNMv1s8L/jJKK1Klag2ERAw==",
+      "entries": 3247
+    }
+  ]
+}
