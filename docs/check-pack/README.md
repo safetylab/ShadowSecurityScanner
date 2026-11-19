@@ -11,6 +11,11 @@ the full specification: the schema, every compiler refusal verbatim, the
 limits, the routing rule, how NSE constructs map onto the format, and what the
 format deliberately does not do.
 
+**[writing-a-converter.md](writing-a-converter.md)** — how to build a converter
+for another source (Nuclei, NASL, your own feed), on your own or with a coding
+agent: the five stages, the invariants, what to reuse, and how to tell a correct
+converter from one that merely produces output.
+
 Two conclusions from it worth accepting before you start:
 
 1. The format describes **an exchange and a match on the reply**. There are no
