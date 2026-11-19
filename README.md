@@ -95,6 +95,40 @@ RANK  CVE                 SEVERITY   CVSS    KEV     EPSS
 3     CVE-2099-0001       CRITICAL   9.8     -       0.00
 ```
 
+### `nse2pack` — Nmap NSE → check-pack
+
+Convert an Nmap NSE script into a **check-pack**: a JSON file the scanner reads at
+startup and runs alongside its built-in checks. A pack is data, not code — it executes
+nothing, so it needs no signature and no consent prompt.
+
+```bash
+cd tools/nse2pack
+
+./nse2checkpack /usr/share/nmap/scripts/http-server-header.nse -o out
+#   nse-version.json             pack-nse-version — 1 check (sweep: 1, own row: 0)
+#   scripts read:   1
+#   converted:      1
+#   not converted:  0
+
+./nse2checkpack --check -v out/nse-version.json
+#   checks:   1 accepted, 0 dropped
+#   http-server-header
+#     when service http → GET / → 1 assertion(s) → detect nginx + version
+```
+
+Then add the folder under Settings → Sources (or drop the file into the scanner's
+`probes` folder) and restart the app: your check runs with the rest.
+
+Python 3.9+, standard library only. The converter translates what the format can
+express — one exchange with the target and a match on the reply — and **refuses** what
+it cannot: exploitation, brute force, DoS, anything that writes to the target, and Lua
+patterns with no RE2 equivalent. Everything refused is listed in a report with the
+reason, so coverage is never quietly smaller than it looks.
+
+- [`docs/check-pack/format.md`](docs/check-pack/format.md) — the format specification
+- [`docs/check-pack/README.md`](docs/check-pack/README.md) — where to start, with reference packs
+- [`tools/nse2pack/USAGE.md`](tools/nse2pack/USAGE.md) — the guide from a run to an installed pack
+
 ## Build the libraries
 
 ```bash

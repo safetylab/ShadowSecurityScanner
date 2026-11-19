@@ -1,0 +1,47 @@
+{
+  "source": "my-cheks",
+  "version": 1,
+  "api": 1,
+  "plugin": {
+    "id": "pack-my-cheks-tcp",
+    "name": "My checks: line services",
+    "category": "network",
+    "protocols": ["tcp"],
+    "default_ports": [7788]
+  },
+  "checks": [
+    {
+      "id": "my-demosvc-greeting",
+      "match": {
+        "service": "demosvc",
+        "ports": [7788],
+        "any_port_open": [7788]
+      },
+      "steps": [
+        {
+          "tcp": {
+            "recv_until": "\n",
+            "recv_max": 256
+          },
+          "expect": {
+            "re": ["^DEMOSVC [0-9][0-9.]* ready"]
+          }
+        }
+      ],
+      "detect": {
+        "product": "demosvc",
+        "version": {
+          "from": "body",
+          "re": "^DEMOSVC ([0-9][0-9.]*)"
+        }
+      },
+      "finding": {
+        "title": "Line service announces its version to anyone who connects",
+        "severity": "low",
+        "cwes": ["CWE-200"],
+        "description": "The service greets an unauthenticated connection with its product name and version. That is enough for someone to look up which flaws apply to this build before touching anything else.",
+        "remediation": "Drop the version from the greeting banner, and restrict the port to the hosts that need it."
+      }
+    }
+  ]
+}

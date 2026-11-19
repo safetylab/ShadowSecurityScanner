@@ -1,0 +1,69 @@
+{
+  "source": "demo",
+  "version": 1,
+  "api": 1,
+  "plugin": {
+    "id": "pack-demo",
+    "name": "Demo checks",
+    "category": "web",
+    "protocols": ["tcp"],
+    "default_ports": [7788, 8099]
+  },
+  "checks": [
+    {
+      "id": "demo-port-open",
+      "match": {"service": "demosvc", "ports": [7788], "any_port_open": [7788]},
+      "steps": [
+        {
+          "tcp": {"recv_until": "\n", "recv_max": 256},
+          "expect": {"re": ["^DEMOSVC [0-9][0-9.]* ready"]}
+        }
+      ],
+      "finding": {
+        "title": "Demo service is listening and answers unauthenticated clients",
+        "severity": "medium",
+        "cwes": ["CWE-306"],
+        "description": "Port 7788 accepts a connection and greets it without asking for credentials. Anything that reaches the port can talk to the service.",
+        "remediation": "Bind the service to localhost or put it behind an authenticated proxy, and restrict the port at the firewall.",
+        "verified": true
+      }
+    },
+    {
+      "id": "demo-backup-url",
+      "match": {"service": "http", "ports": [8099]},
+      "steps": [
+        {
+          "http": {"path": "/backup.sql"},
+          "expect": {
+            "status": [200],
+            "body_all": ["CREATE TABLE"],
+            "not": {"body_any": ["Not Found", "<title>Error"]}
+          }
+        }
+      ],
+      "finding": {
+        "title": "A database dump is downloadable from the web root",
+        "severity": "critical",
+        "cvss": 9.1,
+        "cwes": ["CWE-200"],
+        "description": "GET /backup.sql returns a SQL dump. Anyone who can reach the site can take the database, including whatever it holds in clear text.",
+        "remediation": "Remove the dump from the document root and check the access log for who fetched it.",
+        "verified": true
+      }
+    },
+    {
+      "id": "demo-server-version",
+      "match": {"service": "http", "ports": [8099]},
+      "steps": [
+        {
+          "http": {"path": "/"},
+          "expect": {"header": [{"name": "Server", "re": "nginx/[0-9]"}]}
+        }
+      ],
+      "detect": {
+        "product": "nginx",
+        "version": {"from": "header", "header": "Server", "re": "nginx/([0-9.]+)"}
+      }
+    }
+  ]
+}

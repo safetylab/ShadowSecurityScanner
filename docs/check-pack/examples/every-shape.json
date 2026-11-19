@@ -1,0 +1,55 @@
+{
+  "source": "nse",
+  "version": 1,
+  "api": 1,
+  "plugin": {
+    "id": "pack-nse",
+    "name": "NSE converted checks",
+    "category": "web",
+    "protocols": ["tcp"],
+    "default_ports": [80, 443]
+  },
+  "checks": [
+    {
+      "id": "nse-banner-version",
+      "match": {"service": "http"},
+      "steps": [{"http": {"method": "GET", "path": "/"},
+                 "expect": {"header": [{"name": "Server", "contains": "nginx"}]}}],
+      "detect": {"product": "nginx",
+                 "version": {"from": "header", "header": "Server", "re": "nginx/([0-9.]+)"}}
+    },
+    {
+      "id": "nse-paths-any",
+      "match": {"service": "http"},
+      "steps": [{"http": {"paths": ["/.git/config", "/.svn/entries"]},
+                 "expect": {"body_any": ["[core]", "dir-prop-base"], "require_ci": ["repository"]}}],
+      "finding": {"title": "Version control metadata is served", "severity": "high", "cwes": ["CWE-200"]}
+    },
+    {
+      "id": "nse-two-steps-capture",
+      "match": {"service": "http", "any_port_open": [8080]},
+      "steps": [
+        {"http": {"path": "/login"},
+         "expect": {"re": ["csrf"]},
+         "capture": [{"as": "tok", "from": "body", "re": "value=\"([a-f0-9]+)\""}]},
+        {"http": {"path": "/api/status?csrf={{tok}}"},
+         "expect": {"status": [200], "body_all": ["\"ok\""]}}
+      ],
+      "finding": {"title": "Status endpoint reachable with a scraped token", "severity": "medium"}
+    },
+    {
+      "id": "nse-tcp-banner",
+      "match": {"service": "ftp", "ports": [21]},
+      "steps": [{"tcp": {"send_b64": "", "recv_until": "\n", "recv_max": 256},
+                 "expect": {"re": ["^220 "]}}],
+      "detect": {"product": "vsftpd", "version": {"from": "body", "re": "vsftpd ([0-9.]+)"}}
+    },
+    {
+      "id": "nse-header-absent",
+      "match": {"service": "http"},
+      "steps": [{"http": {"path": "/"},
+                 "expect": {"header": [{"name": "X-Frame-Options", "absent": true}]}}],
+      "finding": {"title": "No X-Frame-Options header", "risk": 3}
+    }
+  ]
+}

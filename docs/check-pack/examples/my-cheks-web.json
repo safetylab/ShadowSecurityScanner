@@ -1,0 +1,83 @@
+{
+  "source": "my-cheks",
+  "version": 1,
+  "api": 1,
+  "plugin": {
+    "id": "pack-my-cheks-web",
+    "name": "My checks: response hardening",
+    "category": "web",
+    "protocols": [
+      "http",
+      "https"
+    ],
+    "default_ports": [
+      80,
+      443,
+      8099
+    ]
+  },
+  "checks": [
+    {
+      "id": "my-no-nosniff",
+      "match": {
+        "service": "http"
+      },
+      "steps": [
+        {
+          "http": {
+            "method": "GET",
+            "path": "/"
+          },
+          "expect": {
+            "header": [
+              {
+                "name": "X-Content-Type-Options",
+                "absent": true
+              }
+            ]
+          }
+        }
+      ],
+      "finding": {
+        "title": "Responses carry no X-Content-Type-Options header",
+        "severity": "low",
+        "cwes": [
+          "CWE-16"
+        ],
+        "description": "Without nosniff a browser may guess a response's type from its content rather than its Content-Type, which turns an uploaded or reflected file into script in some cases.",
+        "remediation": "Send X-Content-Type-Options: nosniff on every response."
+      }
+    },
+    {
+      "id": "my-no-csp",
+      "match": {
+        "service": "http"
+      },
+      "steps": [
+        {
+          "http": {
+            "method": "GET",
+            "path": "/"
+          },
+          "expect": {
+            "header": [
+              {
+                "name": "Content-Security-Policy",
+                "absent": true
+              }
+            ]
+          }
+        }
+      ],
+      "finding": {
+        "title": "Responses carry no Content-Security-Policy header",
+        "severity": "low",
+        "cwes": [
+          "CWE-693"
+        ],
+        "description": "No policy is declared, so the browser places no restriction on where scripts, styles or frames may come from. It is the control that limits the damage of an injection rather than preventing one.",
+        "remediation": "Add a Content-Security-Policy, starting with default-src 'self' and widening only where a page genuinely needs it."
+      }
+    }
+  ]
+}
