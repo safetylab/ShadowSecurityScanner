@@ -14,11 +14,17 @@ on:
 
 jobs:
   tests:
-    runs-on: ubuntu-latest
+    # 3.9 is the floor the converter supports; the current ubuntu-latest image no
+    # longer ships it, so that leg runs on the last image that does.
+    runs-on: ${{ matrix.runs-on }}
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.9', '3.12']
+        include:
+          - python-version: '3.9'
+            runs-on: ubuntu-22.04
+          - python-version: '3.12'
+            runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
