@@ -1,0 +1,57 @@
+{
+  "source": "nmap-ported",
+  "version": 1,
+  "api": 1,
+  "plugin": {
+    "id": "pack-nmap-ported",
+    "name": "Checks ported from Nmap NSE",
+    "category": "monitoring",
+    "protocols": ["tcp"],
+    "default_ports": [2202]
+  },
+  "checks": [
+    {
+      "id": "acarsd-info-open",
+      "match": {"service": "acarsd", "ports": [2202], "any_port_open": [2202]},
+      "steps": [{
+        "tcp": {"recv_max": 512},
+        "expect": {
+          "body_all": ["acarsd", "<Version>"],
+          "not": {"body_all": ["Authorization needed. If your client doesnt support this"]}
+        }
+      }],
+      "detect": {
+        "product": "acarsd",
+        "version": {"from": "body", "re": "<Version>([^<]+)</Version>"}
+      },
+      "finding": {
+        "title": "acarsd daemon exposes its configuration without authorization",
+        "severity": "medium",
+        "description": "The acarsd ACARS decoding daemon answered an unauthenticated connection with its full status document: version, API version, administrator e-mail, connected clients and listening frequencies.",
+        "remediation": "Enable acarsd's authorization requirement and restrict access to the daemon port to trusted networks.",
+        "cwes": ["CWE-306"],
+        "verified": true
+      }
+    },
+    {
+      "id": "acarsd-info-restricted",
+      "match": {"service": "acarsd", "ports": [2202], "any_port_open": [2202]},
+      "steps": [{
+        "tcp": {"recv_max": 512},
+        "expect": {
+          "body_all": ["acarsd", "Authorization needed. If your client doesnt support this"]
+        }
+      }],
+      "detect": {
+        "product": "acarsd",
+        "version": {"from": "body", "re": "acarsd\t([^\t]+)\t"}
+      },
+      "finding": {
+        "title": "acarsd daemon detected (authorization required)",
+        "severity": "info",
+        "description": "An acarsd ACARS decoding daemon is listening and requires authorization. Its version is still disclosed in the greeting.",
+        "verified": true
+      }
+    }
+  ]
+}

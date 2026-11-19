@@ -1,0 +1,185 @@
+{
+  "source": "my-checks",
+  "version": 1,
+  "api": 1,
+  "plugin": {
+    "id": "pack-my-checks",
+    "name": "My own checks",
+    "category": "web",
+    "protocols": ["tcp"],
+    "default_ports": [80, 443, 8080, 8443]
+  },
+  "checks": [
+    {
+      "id": "example-01-marker",
+      "match": {"service": "http"},
+      "steps": [
+        {
+          "http": {"path": "/admin/login"},
+          "expect": {"body_any": ["Admin Console", "Administrator sign-in"]}
+        }
+      ],
+      "finding": {
+        "title": "Administration console reachable",
+        "severity": "medium",
+        "description": "An administration login page answered an unauthenticated request.",
+        "remediation": "Restrict the console to trusted networks.",
+        "cwes": ["CWE-284"]
+      }
+    },
+
+    {
+      "id": "example-02-anchored",
+      "match": {"service": "http"},
+      "steps": [
+        {
+          "http": {"paths": ["/", "/index.php", "/portal/"]},
+          "expect": {
+            "require_ci": ["VendorX"],
+            "body_any": ["2.1.0", "2.1.1", "2.1.2"]
+          }
+        }
+      ],
+      "finding": {
+        "title": "VendorX Portal 2.1.x is affected by CVE-2026-0001",
+        "severity": "high",
+        "cvss": 8.1,
+        "cves": ["CVE-2026-0001"],
+        "verified": true
+      }
+    },
+
+    {
+      "id": "example-03-headers",
+      "match": {"service": "http"},
+      "steps": [
+        {
+          "http": {"method": "OPTIONS", "path": "/"},
+          "expect": {
+            "status": [200, 204],
+            "header": [
+              {"name": "Allow", "contains": "TRACE"},
+              {"name": "X-Frame-Options", "absent": true}
+            ]
+          }
+        }
+      ],
+      "finding": {
+        "title": "TRACE is enabled and the response may be framed",
+        "severity": "low",
+        "verified": true
+      }
+    },
+
+    {
+      "id": "example-04-banner-and-version",
+      "match": {"service": "myservice", "ports": [7777], "any_port_open": [7777]},
+      "steps": [
+        {
+          "tcp": {"recv_until": "\n", "recv_max": 512},
+          "expect": {"re": ["^MyService/[0-9]"]}
+        }
+      ],
+      "detect": {
+        "product": "myservice",
+        "version": {"from": "body", "re": "^MyService/([0-9][^ \\r\\n]*)"}
+      },
+      "finding": {
+        "title": "MyService announces its version in the greeting",
+        "severity": "info",
+        "verified": true
+      }
+    },
+
+    {
+      "id": "example-05-two-steps",
+      "match": {"service": "http"},
+      "steps": [
+        {
+          "http": {"path": "/login"},
+          "expect": {"body_all": ["csrf"]},
+          "capture": [{"as": "tok", "re": "name=\"csrf\" value=\"([a-f0-9]+)\""}]
+        },
+        {
+          "http": {"path": "/api/profile?csrf={{tok}}", "headers": {"X-Requested-With": "sss"}},
+          "expect": {"body_all": ["\"email\""]}
+        }
+      ],
+      "finding": {
+        "title": "Profile API returns data without authentication",
+        "severity": "high",
+        "verified": true
+      }
+    },
+
+    {
+      "id": "example-06-udp",
+      "match": {"service": "myudp", "ports": [9999], "any_port_open": [9999]},
+      "steps": [
+        {
+          "udp": {"send_b64": "UElORw==", "recv_max": 256},
+          "expect": {"bytes_at": [{"offset": 0, "b64": "UE9ORw=="}]}
+        }
+      ],
+      "finding": {
+        "title": "MyUDP service answers unauthenticated probes",
+        "severity": "info",
+        "verified": true
+      }
+    },
+
+    {
+      "id": "example-07-exclude-a-false-positive",
+      "match": {"service": "http"},
+      "steps": [
+        {
+          "http": {"path": "/backup.sql"},
+          "expect": {
+            "body_all": ["CREATE TABLE"],
+            "not": {"body_any": ["Not Found", "<title>Error"]}
+          }
+        }
+      ],
+      "finding": {
+        "title": "A database dump is downloadable",
+        "severity": "critical",
+        "cvss": 9.1,
+        "cwes": ["CWE-538"],
+        "verified": true
+      }
+    },
+
+    {
+      "id": "example-08-detect-only",
+      "match": {"service": "http"},
+      "steps": [
+        {
+          "http": {"path": "/"},
+          "expect": {"header": [{"name": "Server", "re": "MyProxy/[0-9]"}]}
+        }
+      ],
+      "detect": {
+        "product": "myproxy",
+        "version": {"from": "header", "header": "Server", "re": "MyProxy/([0-9.]+)"}
+      }
+    },
+
+    {
+      "id": "example-09-intrusive",
+      "intrusive": true,
+      "match": {"service": "http"},
+      "steps": [
+        {
+          "http": {"method": "POST", "path": "/search"},
+          "expect": {"body_all": ["sss-probe-9f8a72c1"]}
+        }
+      ],
+      "finding": {
+        "title": "Search form reflects submitted input",
+        "severity": "medium",
+        "cwes": ["CWE-79"],
+        "verified": true
+      }
+    }
+  ]
+}

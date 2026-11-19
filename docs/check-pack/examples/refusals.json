@@ -1,0 +1,33 @@
+{
+  "source": "nse", "version": 1, "api": 1,
+  "plugin": {"id": "pack-bad", "name": "Refusals"},
+  "checks": [
+    {"id": "put-method", "match": {"service": "http"},
+     "steps": [{"http": {"method": "PUT", "path": "/x"}, "expect": {"body_any": ["x"]}}],
+     "finding": {"title": "t"}},
+    {"id": "post-without-intrusive", "match": {"service": "http"},
+     "steps": [{"http": {"method": "POST", "path": "/x"}, "expect": {"body_any": ["x"]}}],
+     "finding": {"title": "t"}},
+    {"id": "empty-expect", "match": {"service": "http"},
+     "steps": [{"http": {"path": "/x"}, "expect": {}}],
+     "finding": {"title": "t"}},
+    {"id": "relative-path", "match": {"service": "http"},
+     "steps": [{"http": {"path": "cgi-bin/x"}, "expect": {"body_any": ["x"]}}],
+     "finding": {"title": "t"}},
+    {"id": "verified-on-substring", "match": {"service": "http"},
+     "steps": [{"http": {"path": "/x"}, "expect": {"body_any": ["login"]}}],
+     "finding": {"title": "t", "verified": true}},
+    {"id": "no-precondition", "match": {},
+     "steps": [{"http": {"path": "/x"}, "expect": {"body_any": ["x"]}}],
+     "finding": {"title": "t"}},
+    {"id": "paths-multistep", "match": {"service": "http"},
+     "steps": [{"http": {"paths": ["/a","/b"]}, "expect": {"body_any": ["x"]}},
+               {"http": {"path": "/c"}, "expect": {"body_any": ["y"]}}],
+     "finding": {"title": "t"}},
+    {"id": "lookahead-re", "match": {"service": "http"},
+     "steps": [{"http": {"path": "/x"}, "expect": {"re": ["(?=secret)"]}}],
+     "finding": {"title": "t"}},
+    {"id": "reports-nothing", "match": {"service": "http"},
+     "steps": [{"http": {"path": "/x"}, "expect": {"body_any": ["x"]}}]}
+  ]
+}

@@ -7,3 +7,8 @@
 .DS_Store
 .idea/
 .vscode/
+
+# nse2pack (Python)
+__pycache__/
+*.pyc
+/tools/nse2pack/out/
