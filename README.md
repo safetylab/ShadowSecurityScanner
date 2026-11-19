@@ -127,6 +127,7 @@ reason, so coverage is never quietly smaller than it looks.
 
 - [`docs/check-pack/format.md`](docs/check-pack/format.md) — the format specification
 - [`docs/check-pack/README.md`](docs/check-pack/README.md) — where to start, with reference packs
+- [`docs/check-pack/writing-a-converter.md`](docs/check-pack/writing-a-converter.md) — build a converter for another source (Nuclei, NASL, your own feed)
 - [`tools/nse2pack/USAGE.md`](tools/nse2pack/USAGE.md) — the guide from a run to an installed pack
 
 ## Build the libraries
