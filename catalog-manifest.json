@@ -1,0 +1,69 @@
+{
+  "latest_version": 20261122,
+  "packs": [
+    {
+      "source": "cisa_kev",
+      "version": 20261118,
+      "file": "kev.json.gz",
+      "sha256": "40003597da84fb8847bcefc7a0aa4eb12298825dc9aa2df69c16b2fc4b2e9492",
+      "sig": "dMKE+kKfOZ2GOlzaDMZ87mpfL8vsYFGPV/2cEQRZZwMCUAWSwg5kn74IdeMAqaCsGJCueiMhvuWjaAcVeSOEBA==",
+      "entries": 1786
+    },
+    {
+      "source": "probes:nuclei",
+      "version": 20261120,
+      "file": "nuclei_probes.json.gz",
+      "sha256": "0e3604d2ec15dd24fa38eef1ab66de0901de55535c8cc7f1591fc037ac05b472",
+      "sig": "86EI+nZlxPI2VydywVr9Rllne6jROoZ5DYn6oiL/edEUg2WDNq2ksJXdjUudztkL8arembBPqTJZZCwJzGu/AA==",
+      "entries": 2563
+    },
+    {
+      "source": "sss_chk_2007",
+      "version": 32,
+      "file": "sss_chk.json.gz",
+      "sha256": "c30ca668578ee6ffa89b7bccb0e1a71b2fd53d50cb4787bddee391cd250368a5",
+      "sig": "q04V2dKXtnO1LftY12hPk+7/Iw6V6lNniHp1S78/iQ4qkZAiqBZJQMS3lB6Yh8yEE4KTQ/tRVnIE+LbzZ1FRAQ==",
+      "entries": 6967
+    },
+    {
+      "source": "nuclei",
+      "version": 20261122,
+      "file": "nuclei.json.gz",
+      "sha256": "77b38b0aefc578be0d43eefac41983b19d845843921397652aafeed2f32a9181",
+      "sig": "U80VMmyVHgAHkkHg9cjw/TLHvU5LkycrOhFbVdEJp2gi/thheHgPIjbB2K/idRPsbLax/c5twnIAVw8jNbRHDQ==",
+      "entries": 2563
+    },
+    {
+      "source": "nginx_advisories",
+      "version": 20261120,
+      "file": "nginx_advisories.json.gz",
+      "sha256": "460254e33c2faf92c70b40cdc3172f5a39db2b4233c31f9cd3883410787bb980",
+      "sig": "CwF4Oxbgb+ac8u/KLojF9+x8x09HlkPwX2yFFpJWC9fbu+kINrC5HLhpUPm1daF6bdbJRuDIa+J2Nake2Dx9DQ==",
+      "entries": 77
+    },
+    {
+      "source": "cve_rules",
+      "version": 46,
+      "file": "cverules.json",
+      "sha256": "7208da95e878441cc6bb26ac0c021d2819d0818f08fc107766dbf8f6fc9352e8",
+      "sig": "/joFYr1jTYBD9Gp+UhOwcwIPNkPI4j/niHhNXkOZgP8PAZ9CJ5Sec5xtevR0McHJE19ny9tr9Kwv2n8yvcyHAQ==",
+      "entries": 7986
+    },
+    {
+      "source": "exploitdb",
+      "version": 20261111,
+      "file": "exploitdb.json.gz",
+      "sha256": "082aabad777bbfd55c8ca04d87b13838eef8127e884fe5bccf9afe9996c565f1",
+      "sig": "V5dETv6kRMVUOCzxopo7czhcjHlCdJtjPSKlJduLusgzpfnsn30b+coCkeGQn4jobgeMO2NTzOZl3m2aXBI/DA==",
+      "entries": 25095
+    },
+    {
+      "source": "metasploit",
+      "version": 7274,
+      "file": "metasploit.json.gz",
+      "sha256": "4b583287691d108ded45e2442e4522c504c2ebab30f35734c8545fbd68364d9d",
+      "sig": "MK2YVBUFYHax5/jVQlSS/gKshh51qq8ICBAss8uQ77l7yDhptONOfOyTXRwmgmzWU7FaOS7ND19khuayKmsSCw==",
+      "entries": 3253
+    }
+  ]
+}
